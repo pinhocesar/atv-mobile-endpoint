@@ -1,0 +1,317 @@
+[
+    {
+        "id": "1df1a033e07f388c",
+        "type": "http in",
+        "z": "168102505ed05a20",
+        "name": "",
+        "url": "/listar",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 80,
+        "wires": [
+            [
+                "2e09532f7027127d"
+            ]
+        ]
+    },
+    {
+        "id": "0eb99b8bd823f6de",
+        "type": "http response",
+        "z": "168102505ed05a20",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "71d6b57d976ee6f7",
+        "type": "mysql",
+        "z": "168102505ed05a20",
+        "mydb": "353d9762e750dab7",
+        "name": "",
+        "x": 500,
+        "y": 80,
+        "wires": [
+            [
+                "0eb99b8bd823f6de"
+            ]
+        ]
+    },
+    {
+        "id": "2e09532f7027127d",
+        "type": "function",
+        "z": "168102505ed05a20",
+        "name": "select *",
+        "func": "msg.topic = `select * from tab_teste`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "71d6b57d976ee6f7"
+            ]
+        ]
+    },
+    {
+        "id": "b9ed31e45a7824d2",
+        "type": "http in",
+        "z": "168102505ed05a20",
+        "name": "",
+        "url": "/inserir",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "d8a9ef5c56d098f2"
+            ]
+        ]
+    },
+    {
+        "id": "d8a9ef5c56d098f2",
+        "type": "function",
+        "z": "168102505ed05a20",
+        "name": "insert",
+        "func": "msg.topic = `insert into tab_teste (nome, cpf, dt_nasc) values ('${msg.payload.nome}', '${msg.payload.cpf}', '${msg.payload.dt_nasc}')`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 200,
+        "wires": [
+            [
+                "69146a9067e61a65"
+            ]
+        ]
+    },
+    {
+        "id": "326677f92375cb19",
+        "type": "http in",
+        "z": "168102505ed05a20",
+        "name": "",
+        "url": "/consultar",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "47add13a8e6df106"
+            ]
+        ]
+    },
+    {
+        "id": "47add13a8e6df106",
+        "type": "function",
+        "z": "168102505ed05a20",
+        "name": "select id",
+        "func": "msg.topic = `select * from tab_teste where id = ${msg.req.query.id}`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 140,
+        "wires": [
+            [
+                "b343ba9ff552698b"
+            ]
+        ]
+    },
+    {
+        "id": "f3d422367c97138c",
+        "type": "http in",
+        "z": "168102505ed05a20",
+        "name": "",
+        "url": "/atualizar",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "d8852db6b34befee"
+            ]
+        ]
+    },
+    {
+        "id": "e99aa2462e86f675",
+        "type": "http in",
+        "z": "168102505ed05a20",
+        "name": "",
+        "url": "/deletar",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "8aaf0f2ff30b5cb6"
+            ]
+        ]
+    },
+    {
+        "id": "d8852db6b34befee",
+        "type": "function",
+        "z": "168102505ed05a20",
+        "name": "update",
+        "func": "msg.topic = `update tab_teste set nome = '${msg.payload.nome}', cpf = '${msg.payload.cpf}', dt_nasc = '${msg.payload.dt_nasc}' where id = ${msg.req.query.id}`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "4b234f640ce0b740"
+            ]
+        ]
+    },
+    {
+        "id": "8aaf0f2ff30b5cb6",
+        "type": "function",
+        "z": "168102505ed05a20",
+        "name": "delete",
+        "func": "msg.topic = `delete from tab_teste where id = ${msg.req.query.id}`;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "83215999a1e71684"
+            ]
+        ]
+    },
+    {
+        "id": "b343ba9ff552698b",
+        "type": "mysql",
+        "z": "168102505ed05a20",
+        "mydb": "353d9762e750dab7",
+        "name": "",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "90e29a16193ca138"
+            ]
+        ]
+    },
+    {
+        "id": "69146a9067e61a65",
+        "type": "mysql",
+        "z": "168102505ed05a20",
+        "mydb": "353d9762e750dab7",
+        "name": "",
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "4d9305e90ed8af7a"
+            ]
+        ]
+    },
+    {
+        "id": "4b234f640ce0b740",
+        "type": "mysql",
+        "z": "168102505ed05a20",
+        "mydb": "353d9762e750dab7",
+        "name": "",
+        "x": 500,
+        "y": 260,
+        "wires": [
+            [
+                "16d589a8ea3e9d1d"
+            ]
+        ]
+    },
+    {
+        "id": "83215999a1e71684",
+        "type": "mysql",
+        "z": "168102505ed05a20",
+        "mydb": "353d9762e750dab7",
+        "name": "",
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "1c49669a66e8ae9a"
+            ]
+        ]
+    },
+    {
+        "id": "90e29a16193ca138",
+        "type": "http response",
+        "z": "168102505ed05a20",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4d9305e90ed8af7a",
+        "type": "http response",
+        "z": "168102505ed05a20",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "16d589a8ea3e9d1d",
+        "type": "http response",
+        "z": "168102505ed05a20",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "1c49669a66e8ae9a",
+        "type": "http response",
+        "z": "168102505ed05a20",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "353d9762e750dab7",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "bdd_node_red",
+        "tz": "-03:00",
+        "charset": "UTF8"
+    }
+]
