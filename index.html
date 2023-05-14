@@ -13,7 +13,7 @@
     <title>Form</title>
 </head>
 
-<body class="is-preload" onload="func('GET')">
+<body class="is-preload" onload="carregaLista()">
     <script>
 		if (typeof navigator.serviceWorker !== 'undefined') {
 		  navigator.serviceWorker.register('sw.js')
@@ -50,23 +50,12 @@
                             <th scope="col">Data de nascimento</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="corpo_tabela">
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                            <td>#</td>
+                            <td>#</td>
+                            <td>#</td>
                         </tr>
                     </tbody>
                 </table>
