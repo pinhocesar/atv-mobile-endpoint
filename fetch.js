@@ -35,4 +35,6 @@ async function novoRegistro() {
     });
 
     const responseJson = await response.json();
+
+    window.location.reload();
 }
